@@ -9,7 +9,7 @@ const routes: Routes = [
     children: [
       {
         path: 'tab1',
-        loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+        loadChildren: () => import('../pagos/pagos.module').then(m => m.PagosPageModule)
       },
       {
         path: 'tab2',
@@ -17,6 +17,14 @@ const routes: Routes = [
       },
       {
         path: 'tab3',
+        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+      },
+      {
+        path: 'setting',
+        loadChildren: () => import('../setting/setting.module').then(m => m.SettingPageModule)
+      },
+      {
+        path: 'tests',
         loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
       },
       {
@@ -36,4 +44,4 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
 })
-export class TabsPageRoutingModule {}
+export class TabsPageRoutingModule { }
