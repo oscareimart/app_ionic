@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
-// import { InfiniteScrollCustomEvent } from '@ionic/angular';
+import { data } from '../services/database';
+
 
 @Component({
   selector: 'app-pagos',
@@ -8,36 +9,40 @@ import { LoadingController } from '@ionic/angular';
   styleUrls: ['pagos.page.scss']
 })
 export class PagosPage implements OnInit {
-  items: String[] = [];
+  constructor(
+    private loadingCtrl: LoadingController,
+  ) { }
 
-  constructor(private loadingCtrl: LoadingController) { }
+  clients: any[] = []
+  client: any
+  isModalOpen = false;
 
   ngOnInit() {
-    // setTimeout(() => {
-    //   // this.showLoading()
-    //   for (let i = 1; i < 51; i++) {
-    //     this.items.push(`Item ${i}`);
-    //   }
-    // }, 2000);
   }
 
-  async showLoading() {
-    this.items = []
+  getPageDetail(client: any) {
+    this.setOpen(true)
+    this.client = client
+    console.log(client);
+
+  }
+
+  setOpen(isModalOpen: boolean) {
+    console.log(isModalOpen);
+
+    this.isModalOpen = isModalOpen;
+  }
+
+  async findClients() {
+    this.clients = []
     const loading = await this.loadingCtrl.create({
       message: 'Dismissing after 3 seconds...',
     });
-
     loading.present();
-    setTimeout(async () => {
-      for (let i = 1; i < 51; i++) {
-        this.items.push(`Item ${i}`);
-      }
+    setTimeout(() => {
+      this.clients = data.data//set values
       loading.dismiss()
     }, 2000);
-
-
   }
-
-
 
 }
